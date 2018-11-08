@@ -5,7 +5,7 @@ Example of building a simple server using the connect module in Node.js.
 ## Connect
 Connect creates a server using
 ```javascript
-var app = connect() method.
+var app = connect()
 ```
 
 ## Middleware
