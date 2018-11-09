@@ -1,3 +1,5 @@
 exports.render = function(req, res){
-    res.send('Hello from the controller!');
+    res.render('index', {
+        title: 'Hello World!'
+    });
 };

@@ -2,10 +2,11 @@
     "name": "MEAN",
     "version": "0.0.3",
     "dependencies": {
-        "express": "~4.16.4",
-        "morgan": "~1.9.1",
-        "compression": "~1.0.11",
         "body-parser": "~1.8.0",
-        "method-override": "~2.2.0"
+        "compression": "^1.7.3",
+        "ejs": "~2.5.8",
+        "express": "~4.16.4",
+        "method-override": "~2.2.0",
+        "morgan": "~1.9.1"
     }
 }
