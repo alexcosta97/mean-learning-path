@@ -51,3 +51,14 @@ To speed up the scan, the database engine can use a predefined index, which maps
 For example, to retrieve from a posts database the posts that have more than 10 comments, MongoDB would have to go through all the posts and check whether the post has `commentCount` larger than 10. But if a `commentCount` index was defined, then Mongo would only have to check which documents have `commentCount` larger than 10, before retrieving the documents.
 
 ## MongoDB replica set
+Mongo uses replication of databases to provide data redundancy and improved availability. Replication helps protect data to recover from hardware failure and increase read capacity. A replica set is a set of MongoDB services that host the same dataset.
+
+In the replicate set, one service is the primary and the other are secondaties. All the instances support read operations, but only the primary instance is in charge of write operations. When a write operation occurs, the primary will inform the secondaries about the changes and make sure they've applied it to their datasets' replication.
+
+Another feature of the replica set is its automatic failover. When one of the members can't reach the primary for more than 10 seconds, the replica set will automatically elect and promote a secondary instance as the new primary. When the old primary is back online, it rejoins the set as a secondary.
+
+## MongoDB sharding
+
+MongoDB supports horizontal scaling with what it refers to as sharding. Sharding is the process of splitting the data between different machines, known as shards. Each shard holds a portion of the data and functions as a separate database. The collections of several shards together is what forms a single logical database. Operations are performed through services called query routes, which ask the configuration servers how to delegate each operation to the right shard.
+
+Next: [MongoDB shell](mongoShell.md)
