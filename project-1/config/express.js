@@ -4,6 +4,7 @@ var morgan = require('morgan');
 var compress = require('compression');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var session = require('express-session');
 
 module.exports = function(){
     var app = express();
@@ -24,6 +25,7 @@ module.exports = function(){
     app.set('view engine', 'ejs');
 
     require('../app/routes/index.server.routes.js')(app);
+    require('../app/routes/users.server.routes')(app);
     app.use(express.static('./public'));
     return app;
 }
