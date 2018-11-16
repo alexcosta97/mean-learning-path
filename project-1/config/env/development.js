@@ -1,4 +1,5 @@
 module.exports = {
     // Development configuration options
-    sessionSecret: 'developmentCodigoSessionSecret'
+    sessionSecret: 'developmentCodigoSessionSecret',
+    db:'monogdb://localhost/mean-book'
 };
