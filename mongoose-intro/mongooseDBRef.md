@@ -1,0 +1,2 @@
+# Mongoose DBRef
+Even though MongoDB doesn't support joints, it supports the reference of a document to another using a convention named DBRef. Mongoose includes support for DBRefs using the `ObjectID` schema type and the use of the `ref` property. Mongoose also supports the population of the parent document with the child document when querying the database.
