@@ -51,4 +51,31 @@ module.exports = function(){
 
 This code begins by requiring the Passport module, the local strategy module's Strategy object, and the User Mongoose model. Then, we register the strategy using the `passport.use()` method that uses an instance of the `LocalStrategy` object.
 
-The LocalStrategy constructor takes a callback function as an argument. This callback will be used later when trying to authenticate a user.
+The LocalStrategy constructor takes a callback function as an argument. This callback will be used later when trying to authenticate a user. The callback function accepts three arguments - username, password and a done callback - which will be called when the authentication process is over. Inside the callback function, we will use the user model to find a user with that username and try to authenticate it. In the event of an error, we will pass the error object to the done callback. When the user is authenticated, we will call the done callback with the user object.
+
+Now that we have our local strategy ready, we can go back and use it to configure local authentication. To do so, we can go back to our passport configuration file and add the following code:
+```javascript
+var passport = require('passport');
+var mongoose = require('mongoose');
+
+module.exports = function(){
+    var User = mongoose.model('User');
+    passport.serializeUser(function(user, done){
+        done(null, user.id);
+    });
+
+    passport.deserializeUser(function(id, done){
+        User.findOne({_id: id}, '-password -salt', function(err, user){
+            done(err, user);
+        });
+    });
+
+    require('./strategies/local.js')();
+    };
+```
+
+In this snippet of code, the `passport.serializeUser()` and `passport.deserializeUser()` methods are used to define how passport handles user serialization. When a user is authenticated, Passport will save its `_id` property to the session. When the user object is needed, Passport will then use the id property to grab the user object from the database. We also used the field options argument to make sure that Mongoose didn't fetch the user's password and salt properties. The second thing the code does is including the local strategy configuration file. This way the server application will load the Passport configuration file, which in turn loads the strategies.
+
+After this, all that is left is to adapt the application to support Passport authentication.
+
+Next: [Adapting an Applciation for Passport](passportAppAdaptation.md)
